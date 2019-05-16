@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/Orlan-Asuncion/liri-node-app#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "dotenv": "^8.0.0",
+    "file-system": "^2.2.2",
     "node-spotify-api": "^1.1.1",
     "request": "^2.88.0",
     "spotify": "^0.3.0",
