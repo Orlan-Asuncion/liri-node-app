@@ -37,8 +37,25 @@ var getMeSpotify = function (songName) {
         }
     });
 } 
+
+// var queryURL = "https://rest.bandsintown.com/artists/" + artistName + "/events?app_id=codingbootcamp";
+// console.log("Upcoming Concerts of" + artistNames);
+// axios.get(queryURL)
+// .then(artistResponse => {
+//     let events =artistResponse.data;
+//     event.forEach((item)=>{
+        
+//         console.log("Name of the venue:", item.venue.name);
+//         console.log("Venue Location:", item.venue.location);
+//         let date =moment(item.datetime);
+//         console.log("Date of the event", date.format("MM/DD/YYYY"));
+//     });
+// })
+// .catch(err=>{
+//     console.log(err);
+// });
 var getMeMovie = function(movieName){
-    request('http://omdbapi.com/?t='+ movieName + '&y=&plot=short&r=json', function(error, response, body){
+    request('http://omdbapi.com/?t='+ movieName + '&y=&plot=short&apikey=trilogy', function(error, response, body){
         if(!error && response.statusCode ==200){
 
             var jsonData =JSON.parse(body);
@@ -74,7 +91,10 @@ var pick = function (caseData, functionData) {
         switch (caseData) {
             case 'spotify-this-song':
                 getMeSpotify(functionData);
-                break;           
+                break; 
+            case 'concert-this':
+                getMeAxios(functionData);
+                break; 
             case 'movie-this':   
                 getMeMovie(functionData);
                 break;
