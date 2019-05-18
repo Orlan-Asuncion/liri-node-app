@@ -37,23 +37,26 @@ var getMeSpotify = function (songName) {
         }
     });
 } 
+//Function for concert info
+var getMeConcertInfo = function(artistName){
+    var queryUrl = "https://rest.bandsintown.com/artists/" + artistName + "/events?app_id=codingbootcamp";
+    request(queryUrl, function(error, response, body){
+//if requuest successful
+if(!error && response.statusCode == 200){
+    var concerts = JSON.parse(body);
+    for (var i=0; i<concerts.length; i++){
+        console.log("********EVENT INFO*******");
+        console.log("Name of the Venue:", + concerts[i].venue.name);
+        console.log("Venue Location:", + concerts[i].venue.city);
+        // console.log("Date of the Event:", + concerts[i].datetime);
+         console.log("Date of the Event:", + date.format("MM/DD/YYYY"));
+    }
+}else{
+    console.log('Error occured');
+}
+    });
+}
 
-// var queryURL = "https://rest.bandsintown.com/artists/" + artistName + "/events?app_id=codingbootcamp";
-// console.log("Upcoming Concerts of" + artistNames);
-// axios.get(queryURL)
-// .then(artistResponse => {
-//     let events =artistResponse.data;
-//     event.forEach((item)=>{
-        
-//         console.log("Name of the venue:", item.venue.name);
-//         console.log("Venue Location:", item.venue.location);
-//         let date =moment(item.datetime);
-//         console.log("Date of the event", date.format("MM/DD/YYYY"));
-//     });
-// })
-// .catch(err=>{
-//     console.log(err);
-// });
 var getMeMovie = function(movieName){
     request('http://omdbapi.com/?t='+ movieName + '&y=&plot=short&apikey=trilogy', function(error, response, body){
         if(!error && response.statusCode ==200){
@@ -93,7 +96,7 @@ var pick = function (caseData, functionData) {
                 getMeSpotify(functionData);
                 break; 
             case 'concert-this':
-                getMeAxios(functionData);
+                getMeConcertInfo(functionData);
                 break; 
             case 'movie-this':   
                 getMeMovie(functionData);
