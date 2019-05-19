@@ -13,9 +13,36 @@ var Spotify = require('node-spotify-api');
 
 var spotify = new Spotify(keys.spotify);
 
+var moment = require('moment');
+
 var getArtistNames = function (artist) {
     return artist.name;
 }
+//Funtion for Concert Info: Bands in Town
+function showConcertInfo(inputParameter){
+    var queryUrl = "https://rest.bandsintown.com/artists/" + inputParameter + "/events?app_id=codingbootcamp";
+    request(queryUrl, function(error, response, body) {
+    // If the request is successful
+    if (!error && response.statusCode === 200) {
+        var concerts = JSON.parse(body);
+        for (var i = 0; i < concerts.length; i++) {  
+            console.log("**********EVENT INFO*********");  
+            fs.appendFileSync("log.txt", "**********EVENT INFO*********\n");//Append in log.txt file
+            console.log(i);
+            fs.appendFileSync("log.txt", i+"\n");
+            console.log("Name of the Venue: " + concerts[i].venue.name);
+            fs.appendFileSync("log.txt", "Name of the Venue: " + concerts[i].venue.name+"\n");
+            console.log("Venue Location: " +  concerts[i].venue.city);
+            fs.appendFileSync("log.txt", "Venue Location: " +  concerts[i].venue.city+"\n");
+            console.log("Date of the Event: " +  concerts[i].datetime);
+            fs.appendFileSync("log.txt", "Date of the Event: " +  concerts[i].datetime+"\n");
+            console.log("*****************************");
+            fs.appendFileSync("log.txt", "*****************************"+"\n");
+        }
+    } else{
+      console.log('Error occurred.');
+    }
+});}
 
 var getMeSpotify = function (songName) {
 
@@ -28,34 +55,17 @@ var getMeSpotify = function (songName) {
         var songs = data.tracks.items;
         for (var i = 0; i < songs.length; i++) {
             console.log(i);
+            console.log('******LIRI SAYS******');
             console.log('artist(s):' + songs[i].artists.map(
                 getArtistNames));
             console.log('song name:' + songs[i].name);
-            console.log('preview song:' + songs[i].oreview_url);
+            console.log('preview song:' + songs[i].preview_url);
             console.log('album:' + songs[i].album.name);
-            console.log('--------------------------------');
+            console.log('****************************');
         }
     });
 } 
-//Function for concert info
-var getMeConcertInfo = function(artistName){
-    var queryUrl = "https://rest.bandsintown.com/artists/" + artistName + "/events?app_id=codingbootcamp";
-    request(queryUrl, function(error, response, body){
-//if requuest successful
-if(!error && response.statusCode == 200){
-    var concerts = JSON.parse(body);
-    for (var i=0; i<concerts.length; i++){
-        console.log("********EVENT INFO*******");
-        console.log("Name of the Venue:", + concerts[i].venue.name);
-        console.log("Venue Location:", + concerts[i].venue.city);
-        // console.log("Date of the Event:", + concerts[i].datetime);
-         console.log("Date of the Event:", + date.format("MM/DD/YYYY"));
-    }
-}else{
-    console.log('Error occured');
-}
-    });
-}
+
 
 var getMeMovie = function(movieName){
     request('http://omdbapi.com/?t='+ movieName + '&y=&plot=short&apikey=trilogy', function(error, response, body){
@@ -96,7 +106,7 @@ var pick = function (caseData, functionData) {
                 getMeSpotify(functionData);
                 break; 
             case 'concert-this':
-                getMeConcertInfo(functionData);
+                showConcertInfo(functionData);
                 break; 
             case 'movie-this':   
                 getMeMovie(functionData);
