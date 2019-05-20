@@ -18,7 +18,7 @@ var moment = require('moment');
 var getArtistNames = function (artist) {
     return artist.name;
 }
-//Funtion for Concert Info: Bands in Town
+//Function for Concert Info: Bands in Town
 function showConcertInfo(inputParameter){
     var queryUrl = "https://rest.bandsintown.com/artists/" + inputParameter + "/events?app_id=codingbootcamp";
     request(queryUrl, function(error, response, body) {
@@ -42,7 +42,8 @@ function showConcertInfo(inputParameter){
     } else{
       console.log('Error occurred.');
     }
-});}
+});
+}
 
 var getMeSpotify = function (songName) {
 
