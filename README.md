@@ -23,7 +23,7 @@ LIRI is a Language Interpretation and Recognition Interface, it's just like SIRI
 
        Output: The system will display "List of Events": 'Name of the Venue','Venue Location' and 'Date of the Event'.
 
-![](screenshots/concert-this_results.PNG)
+ ![](screenshots/concert-this_results.png)
 
 * Example: Run  "spotify-this-song" command
 
@@ -31,7 +31,7 @@ LIRI is a Language Interpretation and Recognition Interface, it's just like SIRI
 
        Output: The system will display : Artist(s),The song's name, A preview link of the song from Spotify,and The album that the song is from. 
 
-![](screenshots/spotify-this-song_results.PNG)
+ ![](screenshots/spotify-this-song_results.png)
         
       
 * Example: Run  "movie-this" command
@@ -56,7 +56,7 @@ LIRI is a Language Interpretation and Recognition Interface, it's just like SIRI
 
        * Actors in the movie.
 
-![](screenshots/movie-this_results.PNG)
+ ![](screenshots/movie-this_results.png)
 
 * Example: Run "do-what-it-says" command
 
@@ -67,11 +67,11 @@ LIRI is a Language Interpretation and Recognition Interface, it's just like SIRI
 
      * It should run `spotify-this-song` for "I Want it That Way," as follows the text in `random.txt`.
 
-![](screenshots/do-what-it-says_results.PNG)
+ ![](screenshots/do-what-it-says_results.png)
     
 ## TECHNOLOGIES USED
 
-* Nodejs
+* Node.js
 * Javascript
 * Node packages
     - File System(fs)
